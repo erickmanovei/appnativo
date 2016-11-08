@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">App Nativo</string>
+    <string name="title_activity_cadastro">cadastro</string>
 </resources>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5sp">
+
+    <TextView
+        android:id="@+id/nomelv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:gravity="center_vertical"
+        android:textColor="#FF000000"
+        android:text="Nome"
+        android:textSize="18dp"
+        />
+    <TextView
+        android:id="@+id/sobrenomelv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:gravity="center_vertical"
+        android:textColor="#0000FF"
+        android:text="Acertos"
+        android:textSize="12dp"
+        />
+    <TextView
+        android:id="@+id/cpflv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5sp"
+        android:gravity="center_vertical"
+        android:textColor="#FF0000"
+        android:text="Erros"
+        android:textSize="12dp"
+        />
+
+</LinearLayout>

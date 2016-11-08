@@ -1,0 +1,22 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#FFECECEC"
+        android:dividerHeight="2sp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Voltar"
+        android:id="@+id/btVoltarvs"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

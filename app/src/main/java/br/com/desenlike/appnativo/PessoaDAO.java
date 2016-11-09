@@ -31,6 +31,22 @@ public class PessoaDAO {
         return res;
     }
 
+    public boolean insertMultiplo(List<PessoaVO> pessoas) {
+        SQLiteDatabase db = new DBHelper(ctx).getWritableDatabase();
+
+        try {
+            for (int i = 0; i < pessoas.size(); i++) {
+                db.execSQL("INSERT INTO " + table_name + " (nome, sobrenome, cpf) VALUES ('" + pessoas.get(i).getNome() + " " + i + "', '" + pessoas.get(i).getSobrenome() + " " + i + "', '" + pessoas.get(i).getCpf() + " " + i + "');");
+            }
+            db.close();
+            return true;
+        }catch (Exception e){
+            System.out.println("Erro: "+e.getMessage());
+            return false;
+        }
+
+    }
+
     public boolean update(PessoaVO pessoa) {
         SQLiteDatabase db = new DBHelper(ctx).getWritableDatabase();
         ContentValues values = new ContentValues();

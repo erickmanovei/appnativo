@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by erick on 08/11/2016.
@@ -27,7 +29,7 @@ public class CadastroEmLote extends AsyncTask<Void, Void, Boolean> {
         // configura o dialogo e inicia sua exibição
         dialogo = new ProgressDialog(c);
         dialogo.setMessage("Inserindo Pessoas no Banco");
-        dialogo.setTitle("Sincronizando");
+        dialogo.setTitle("Sincronizando...");
         dialogo.setCancelable(true);
         dialogo.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         dialogo.show();
@@ -67,21 +69,37 @@ public class CadastroEmLote extends AsyncTask<Void, Void, Boolean> {
         try{
 
 
-            System.out.println("quantidade: "+quantidade);
+            SQLiteDatabase db = new DBHelper(c).getWritableDatabase();
+            String sql = "INSERT INTO pessoa (nome, sobrenome, cpf) VALUES ";
+
 
             for(int i=0; i < this.quantidade; i++){
-                PessoaDAO dao = new PessoaDAO(c);
-                PessoaVO vo = new PessoaVO();
-                vo.setNome("Pessoa "+i);
-                vo.setSobrenome("Sobrenome Pessoa "+i);
-                vo.setCpf("123"+i);
-                dao.insert(vo);
+                sql = sql + "('NOME " + i + "', 'SOBRENOME" + i + "', 'CPF" + i + "')";
 
+                if(i+1 == quantidade){
+                    sql = sql + ";";
+                    db.execSQL(sql);
+                }else{
+                    if((i%50 == 0)&&(i>0)){
+                        sql = sql + ";";
+                        db.execSQL(sql);
+                        sql = "INSERT INTO pessoa (nome, sobrenome, cpf) VALUES ";
+                    }else{
+                        sql = sql + ",";
+                    }
+                }
             }
-
+            //System.out.println("SQL: "+sql);
+            db.close();
             return true;
         }catch (Exception e) {
-            Log.e("Cadastro: ",e.toString());
+
+            Toast t = new Toast(c);
+            t.setDuration(Toast.LENGTH_LONG);
+            t.setText(e.toString());
+            t.show();
+
+
             return false;
         }
     }

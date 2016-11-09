@@ -3,6 +3,7 @@ package br.com.desenlike.appnativo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -80,35 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void cadastrarLote(int quantidade){
-        for(int i=0; i < quantidade; i++){
-            PessoaDAO dao = new PessoaDAO(this);
-            PessoaVO vo = new PessoaVO();
-            vo.setNome("Pessoa "+i);
-            vo.setSobrenome("Sobrenome Pessoa "+i);
-            vo.setCpf("123"+i);
-            dao.insert(vo);
-            if((i+1)== quantidade){
-                AlertDialog alertDialog;
-                alertDialog = new AlertDialog.Builder(this).create();
-                alertDialog.setTitle("Mensagem");
-                alertDialog.setCanceledOnTouchOutside(false);
-                alertDialog.setMessage("Cadastro Realizado!");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
-                alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-
-                    }
-                });
-                alertDialog.show();
-            }
-        }
-        //new CadastroEmLote(this, quantidade).execute();
+        new CadastroEmLote(this, quantidade).execute();
     }
 
     public void limpar(){
